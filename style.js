@@ -3,7 +3,7 @@ const blogContainer = document.querySelector("#blog-container");
 const searchInput = document.querySelector("#search-input");
 const searchButton = document.querySelector("#search-button");
 
-async function fetchNews(query = '') {
+async function fetchNews(query) {
     try {
         const apiUrl = query
             ? `https://newsapi.org/v2/everything?q=${query}&pageSize=20&apiKey=${apiKey}`
@@ -18,7 +18,7 @@ async function fetchNews(query = '') {
 }
 
 function displayBlogs(articles) {
-    blogContainer.innerHTML = "";
+    blogContainer.innerHTML = "";// Clear previous content
     articles.forEach((article) => {
         const blogCard = document.createElement("div");
         blogCard.classList.add("blog-card");
@@ -40,14 +40,7 @@ function displayBlogs(articles) {
     });
 }
 
-(async () => {
-    try {
-        const articles = await fetchNews();
-        displayBlogs(articles);
-    } catch (error) {
-        console.error("Error fetching random news", error);
-    }
-})();
+ 
 
 searchButton.addEventListener("click", async () => {
     const query = searchInput.value.trim();
@@ -60,3 +53,4 @@ searchButton.addEventListener("click", async () => {
         }
     }
 });
+ 
